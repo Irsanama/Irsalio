@@ -237,7 +237,7 @@
   gap: var(--sp-2);
 }
 
-.settings-row .input {
+.settings-row > .input {
   flex: 1;
   min-width: 0;
 }
