@@ -1,0 +1,487 @@
+/* ── Модальные окна ── */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sp-4);
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 560px;
+  max-height: 85vh;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  animation: modalIn var(--dur-normal) var(--ease);
+}
+
+.modal-header {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--sp-4);
+  border-bottom: 1px solid var(--border);
+}
+
+.modal-title {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+}
+
+.modal-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--sp-3);
+  padding: var(--sp-4);
+  overflow-y: auto;
+}
+
+.modal-footer {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--sp-2);
+  padding: var(--sp-4);
+  border-top: 1px solid var(--border);
+}
+
+/* ── Палитра команд ── */
+
+.palette-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 15vh;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.palette {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 560px;
+  max-height: 60vh;
+  margin: 0 var(--sp-4);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  animation: modalIn var(--dur-normal) var(--ease);
+}
+
+.palette-input {
+  flex-shrink: 0;
+  height: 56px;
+  padding: var(--sp-4);
+  font-size: var(--font-size-lg);
+  color: var(--text);
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border);
+  outline: none;
+}
+
+.palette-list {
+  flex: 1;
+  padding: var(--sp-2);
+  overflow-y: auto;
+}
+
+.palette-item {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  width: 100%;
+  height: 44px;
+  padding: 10px 12px;
+  border-radius: var(--radius-md);
+  transition: all var(--dur-fast) var(--ease);
+}
+
+.palette-item:hover {
+  background: var(--surface-hover);
+}
+
+.palette-item-main {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.palette-item-title {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.palette-item-subtitle {
+  font-size: var(--font-size-sm);
+  color: var(--text-faint);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.palette-section-title {
+  padding: 8px 12px 4px;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-normal);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.palette-empty {
+  padding: var(--sp-4);
+  font-size: var(--font-size-md);
+  text-align: center;
+  color: var(--text-faint);
+}
+
+/* ── Рабочие пространства ── */
+
+.workspace-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+.workspace-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-2);
+  height: 44px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+.workspace-list-item.is-active {
+  background: var(--focus-soft);
+  border-color: var(--focus);
+}
+
+.workspace-list-switch {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-2);
+  padding: 4px;
+  border-radius: var(--radius-sm);
+}
+
+.workspace-list-switch:hover {
+  background: var(--surface-hover);
+}
+
+.workspace-list-delete {
+  color: var(--danger);
+}
+
+.workspace-list-delete:hover {
+  background: var(--danger-soft);
+}
+
+/* ── Настройки ── */
+
+.settings {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+.settings-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  padding: var(--sp-4);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+
+.settings-section-title {
+  margin-bottom: var(--sp-2);
+  padding-bottom: var(--sp-2);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  border-bottom: 1px solid var(--border);
+}
+
+.settings-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+.settings-row .input {
+  flex: 1;
+  min-width: 0;
+}
+
+.settings-row .btn {
+  flex-shrink: 0;
+}
+
+.settings-row-mode .btn {
+  margin-left: auto;
+}
+
+.settings-password-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  width: 100%;
+}
+
+.settings-password-group .password-control {
+  width: 100%;
+}
+
+.settings-password-group .btn {
+  align-self: flex-start;
+}
+
+.settings-row-combobox {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+.settings-row-combobox .workspace-combobox {
+  flex: 1;
+  min-width: 0;
+}
+
+.settings-row-io {
+  display: flex;
+  gap: var(--sp-2);
+}
+
+.settings-row-io .btn {
+  flex: 1;
+}
+
+.settings-note {
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+  color: var(--text-faint);
+}
+
+.settings-input {
+  width: 100%;
+}
+
+.settings-danger {
+  background: var(--danger-soft);
+  border-color: var(--danger);
+}
+
+.settings-danger .settings-section-title {
+  color: var(--danger);
+}
+
+/* ── Использование хранилища ── */
+
+.storage-usage {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.storage-usage-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--sp-2);
+}
+
+.storage-usage-value {
+  font-family: var(--font-mono);
+  font-size: 1.25rem;
+  font-weight: var(--font-weight-bold);
+}
+
+.storage-usage-total {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+  color: var(--text-faint);
+}
+
+.storage-usage-bar {
+  height: 6px;
+  overflow: hidden;
+  background: var(--border);
+  border-radius: 999px;
+}
+
+.storage-usage-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: inherit;
+  transition: all var(--dur-normal) var(--ease);
+}
+
+.storage-usage-fill.is-warning {
+  background: var(--warning);
+}
+
+.storage-usage-fill.is-danger {
+  background: var(--danger);
+}
+
+.storage-usage-details {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--sp-2);
+}
+
+.storage-usage-stat {
+  padding: var(--sp-3);
+  background: var(--bg);
+  border-radius: var(--radius-md);
+}
+
+.storage-usage-stat-label {
+  margin-bottom: 2px;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-normal);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.storage-usage-stat-value {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+}
+
+.storage-usage-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+}
+
+/* ── Комбобокс рабочих пространств ── */
+
+.workspace-combobox {
+  position: relative;
+  display: flex;
+  flex: 1;
+  align-items: center;
+  min-width: 0;
+  overflow: visible;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+.workspace-combobox-input {
+  flex: 1;
+  min-width: 0;
+  height: 36px;
+  padding: 0 8px;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+}
+
+.workspace-combobox-input:focus {
+  box-shadow: none;
+}
+
+.workspace-combobox-toggle {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  border-left: 1px solid var(--border);
+  transition: all var(--dur-fast) var(--ease);
+}
+
+.workspace-combobox-toggle:hover {
+  color: var(--text);
+  background: var(--surface-hover);
+}
+
+.workspace-combobox-toggle svg {
+  transition: transform var(--dur-fast) var(--ease);
+}
+
+.workspace-combobox-toggle.is-open svg {
+  transform: rotate(180deg);
+}
+
+.workspace-combobox-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  left: 0;
+  z-index: 10;
+  display: none;
+  max-height: 200px;
+  margin-top: 4px;
+  overflow-y: auto;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+}
+
+.workspace-combobox-dropdown.is-open {
+  display: block;
+}
+
+.workspace-combobox-option {
+  display: block;
+  width: 100%;
+  padding: 8px 12px;
+  font-size: var(--font-size-md);
+  text-align: left;
+  color: var(--text);
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  transition: all var(--dur-fast) var(--ease);
+}
+
+.workspace-combobox-option:hover {
+  background: var(--surface-hover);
+}
+
+.workspace-combobox-option.is-active {
+  font-weight: var(--font-weight-semibold);
+  color: var(--text);
+  background: var(--accent-soft);
+}

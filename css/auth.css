@@ -1,0 +1,237 @@
+/* ── Экраны загрузки и авторизации ── */
+
+.boot,
+.auth {
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+}
+
+.auth {
+  padding: var(--sp-4);
+}
+
+.boot-card,
+.auth-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  animation: slideUp var(--dur-normal) var(--ease);
+}
+
+.boot-name {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--sp-2);
+}
+
+.boot-note {
+  font-size: var(--font-size-md);
+  color: var(--text-faint);
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 360px;
+  padding: var(--sp-6) var(--sp-5);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.auth-head {
+  margin-bottom: var(--sp-5);
+  text-align: center;
+}
+
+.auth-title {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--sp-1);
+}
+
+.auth-subtitle {
+  font-size: var(--font-size-md);
+  color: var(--text-faint);
+}
+
+.auth-mode-switch {
+  margin-bottom: var(--sp-5);
+  padding: var(--sp-3);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+.auth-mode-label {
+  margin-bottom: var(--sp-2);
+  text-align: center;
+}
+
+#auth-mode-status {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-normal);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.auth-mode-segmented {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  padding: 4px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+.auth-mode-segmented .segmented-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  height: 36px;
+  padding: 8px;
+  font-size: var(--font-size-sm);
+  border-radius: var(--radius-sm);
+}
+
+.auth-mode-segmented .segmented-button svg {
+  width: 14px;
+  height: 14px;
+}
+
+.auth-mode-segmented .segmented-button.is-active {
+  color: var(--bg);
+  background: var(--accent);
+  box-shadow: var(--shadow-sm);
+}
+
+.auth-mode-hint {
+  min-height: 1.2em;
+  margin-top: var(--sp-2);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+  text-align: center;
+  color: var(--text-faint);
+}
+
+.auth-mode-hint.is-warning {
+  color: var(--warning);
+}
+
+.auth-mode-hint.is-success {
+  color: var(--success);
+}
+
+.auth-tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: var(--sp-5);
+  padding: 4px;
+  background: var(--bg);
+  border-radius: var(--radius-md);
+}
+
+.auth-tab {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  padding: 8px;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-secondary);
+  border-radius: var(--radius-sm);
+  transition: all var(--dur-fast) var(--ease);
+}
+
+.auth-tab:hover:not(.is-active) {
+  background: var(--surface-hover);
+}
+
+.auth-tab.is-active {
+  color: var(--text);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field-label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-secondary);
+}
+
+.form-error {
+  margin-bottom: var(--sp-3);
+  padding: 12px;
+  font-size: var(--font-size-sm);
+  color: var(--danger);
+  background: var(--danger-soft);
+  border-left: 3px solid var(--danger);
+  border-radius: var(--radius-md);
+}
+
+.password-control {
+  position: relative;
+}
+
+.password-control .input {
+  padding-right: 40px;
+}
+
+.password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  color: var(--text-faint);
+  border-radius: var(--radius-sm);
+  transform: translateY(-50%);
+}
+
+.password-toggle:hover {
+  color: var(--text);
+  background: var(--accent-soft);
+}
+
+.password-toggle .icon-eye,
+.password-toggle .icon-eye-off {
+  display: none;
+}
+
+.password-toggle .icon-eye {
+  display: block;
+}
+
+.password-control.is-visible .icon-eye {
+  display: none;
+}
+
+.password-control.is-visible .icon-eye-off {
+  display: block;
+}

@@ -1,0 +1,477 @@
+/* ── Тосты ── */
+
+.toast-root {
+  position: fixed;
+  right: var(--sp-4);
+  bottom: var(--sp-4);
+  left: var(--sp-4);
+  z-index: var(--z-toast);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  pointer-events: none;
+}
+
+.toast {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: 12px 16px;
+  font-size: var(--font-size-md);
+  pointer-events: auto;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  animation: slideUp var(--dur-normal) var(--ease);
+}
+
+.toast.is-success {
+  border-left: 3px solid var(--success);
+}
+
+.toast.is-error {
+  border-left: 3px solid var(--danger);
+}
+
+.toast.is-leaving {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: all var(--dur-normal) var(--ease);
+}
+
+/* ── Анимации ── */
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes modalIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* ── Адаптив: тач-устройства ── */
+
+@media (hover: none), (pointer: coarse) {
+  .side-item-actions {
+    opacity: 1;
+  }
+}
+
+/* ── Адаптив: мобильные (до 768px) ── */
+
+@media (max-width: 767.99px) {
+  .calendar-cell {
+    min-height: 44px;
+    max-height: 56px;
+    padding: 4px;
+  }
+
+  .calendar-day-number {
+    margin-bottom: 2px;
+    font-size: var(--font-size-sm);
+  }
+
+  .calendar-event,
+  .calendar-more {
+    display: none;
+  }
+
+  .calendar-week-day {
+    gap: var(--sp-2);
+    padding: var(--sp-2);
+  }
+
+  .calendar-week-date {
+    min-width: 32px;
+  }
+
+  .calendar-week-day-num {
+    font-size: var(--font-size-xl);
+  }
+
+  .calendar-week-task {
+    padding: 5px 6px;
+    font-size: var(--font-size-sm);
+  }
+
+  .calendar-year-month {
+    min-height: 160px;
+    padding: var(--sp-2);
+  }
+
+  .calendar-year-month-title {
+    margin-bottom: 1px;
+    padding-bottom: 2px;
+    font-size: var(--font-size-md);
+  }
+
+  .calendar-year-weekdays span {
+    padding: 2px 0;
+    font-size: 0.75rem;
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-normal);
+    letter-spacing: 0.03em;
+    text-align: center;
+    text-transform: uppercase;
+    color: var(--text-faint);
+  }
+
+  .calendar-year-weekdays span.is-weekend {
+    color: var(--danger);
+  }
+
+  .calendar-year-day {
+    padding: 2px 0;
+    font-size: 0.75rem;
+  }
+
+  .calendar-view-btn {
+    height: 28px;
+    padding: 5px 8px;
+    font-size: var(--font-size-sm);
+  }
+
+  .topbar {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto;
+    gap: var(--sp-3);
+    width: 100%;
+    padding-bottom: 0;
+    overflow: hidden;
+  }
+
+  .topbar-left {
+    grid-column: 1;
+    grid-row: 1;
+    min-width: 0;
+  }
+
+  #search-button {
+    grid-column: 2;
+    grid-row: 1;
+    width: 36px;
+    padding: 0;
+    justify-content: center;
+  }
+
+  .search-placeholder {
+    display: none;
+  }
+
+  .topbar-right {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+    padding: var(--sp-3) 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .records-tools > * {
+    flex: 0 0 auto;
+    flex-shrink: 0;
+  }
+
+  .settings-section {
+    padding: var(--sp-3);
+  }
+
+  .settings-row-vertical {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .settings-password-group {
+    width: 100%;
+  }
+
+  .settings-password-group .btn {
+    width: 100%;
+    align-self: stretch;
+  }
+
+  .settings-row-combobox {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .settings-row-combobox .workspace-combobox {
+    width: 100%;
+  }
+
+  .settings-row-combobox .btn {
+    width: 100%;
+  }
+
+  .settings-row-io {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--sp-2);
+  }
+
+  .settings-row-io .btn {
+    width: 100%;
+  }
+
+  .settings-row-mode {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--sp-2);
+  }
+
+  .settings-row-mode .btn {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .storage-usage-actions {
+    flex-direction: column;
+  }
+
+  .storage-usage-actions .btn {
+    width: 100%;
+  }
+
+  .side-title,
+  .tab-badge,
+  .storage-mode-badge,
+  .palette-section-title,
+  .storage-usage-stat-label,
+  .progress-label,
+  .progress-count,
+  .calendar-day-indicator,
+  .week-header-day-name,
+  .week-time-label,
+  .week-block-time,
+  .week-block-progress,
+  .week-task-block.is-pinned::after,
+  .time-input-end::before {
+    font-size: 0.75rem;
+  }
+}
+
+@media (min-width: 476px) and (max-width: 767.99px) {
+  .calendar-year-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 424px) {
+  .records-tools {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: flex-start;
+    gap: var(--sp-2);
+    width: 100%;
+    min-width: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .records-tools::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* ── Адаптив: десктоп (от 768px) ── */
+
+@media (min-width: 768px) {
+  .mobile-fab {
+    display: none !important;
+  }
+
+  .sidebar {
+    position: relative;
+    z-index: 1;
+    box-shadow: none;
+    transform: translateX(0);
+  }
+
+  .sidebar-backdrop {
+    display: none !important;
+  }
+
+  #sidebar-open,
+  #sidebar-close {
+    display: none;
+  }
+
+  .topbar {
+    padding: var(--sp-4) var(--sp-6);
+  }
+
+  .btn {
+    height: 40px;
+    padding: 0 20px;
+  }
+
+  .input {
+    height: 40px;
+  }
+
+  .calendar-year-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .calendar-year-month {
+    min-height: 180px;
+    padding: var(--sp-4);
+  }
+
+  .calendar-year-month-title {
+    font-size: var(--font-size-xl);
+  }
+
+  .calendar-year-weekdays span {
+    font-size: var(--font-size-xs);
+  }
+
+  .calendar-year-day {
+    padding: 4px 0;
+    font-size: var(--font-size-sm);
+  }
+
+  .calendar-cell {
+    min-height: 100px;
+    padding: 8px;
+  }
+
+  .calendar-day-number {
+    font-size: var(--font-size-md);
+  }
+
+  .calendar-event {
+    font-size: var(--font-size-sm);
+  }
+
+  .panel-properties {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .kpi-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .dash-grid {
+    grid-template-columns: 1.2fr 0.8fr;
+  }
+
+  .board {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .toast-root {
+    left: auto;
+    width: 320px;
+  }
+
+  @media (max-width: 910px) {
+    .topbar {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      grid-template-rows: auto auto;
+      gap: var(--sp-3);
+      width: 100%;
+      padding-bottom: 0;
+      overflow: hidden;
+    }
+
+    .topbar-left {
+      grid-column: 1;
+      grid-row: 1;
+      min-width: 0;
+    }
+
+    #search-button {
+      grid-column: 2;
+      grid-row: 1;
+      width: 36px;
+      padding: 0;
+      justify-content: center;
+    }
+
+    .search-placeholder {
+      display: none;
+    }
+
+    .topbar-right {
+      grid-column: 1 / -1;
+      grid-row: 2;
+      width: 100%;
+      min-width: 0;
+      margin: 0;
+      padding: var(--sp-3) 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .records-tools > * {
+      flex: 0 0 auto;
+      flex-shrink: 0;
+    }
+  }
+}
+
+@media (min-width: 926px) and (max-width: 1023px) {
+  .calendar-year-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .kpi-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .calendar-cell {
+    min-height: 120px;
+    padding: 10px;
+  }
+
+  .calendar-year-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--sp-3);
+  }
+}
+
+/* ── Скроллбары ── */
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-faint);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
+}
