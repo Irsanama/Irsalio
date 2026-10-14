@@ -1,5 +1,4 @@
 /* ── Боковая панель задачи ── */
-
 .task-panel-backdrop {
   position: fixed;
   inset: 0;
@@ -35,6 +34,7 @@
 
 .task-title-input {
   flex: 1;
+  min-width: 0;
   padding: 4px 0;
   font-size: var(--font-size-2xl);
   font-weight: var(--font-weight-bold);
@@ -93,7 +93,6 @@
 }
 
 /* ── Подзадачи ── */
-
 .subtask-list {
   display: flex;
   flex-direction: column;
@@ -184,7 +183,6 @@
 }
 
 /* ── Палитра цветов ── */
-
 .task-color-palette {
   display: flex;
   flex-wrap: wrap;
@@ -252,7 +250,6 @@
 }
 
 /* ── Режим просмотра ── */
-
 .task-panel-view-header {
   align-items: center;
 }
@@ -294,7 +291,6 @@
 }
 
 /* ── Markdown контент ── */
-
 .markdown-content {
   font-size: var(--font-size-md);
   line-height: var(--line-height-relaxed);
@@ -438,7 +434,6 @@
 }
 
 /* ── Markdown тулбар ── */
-
 .markdown-toolbar {
   display: flex;
   flex-wrap: wrap;
@@ -484,7 +479,6 @@
 }
 
 /* ── Переключатель времени ── */
-
 .time-mode-switch {
   margin-bottom: var(--sp-2);
 }

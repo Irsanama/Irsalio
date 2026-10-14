@@ -19,7 +19,6 @@ import { state, WEEKDAYS } from "../state/state.js";
 import { openTaskPanel } from "../features/taskPanel.js";
 import { api } from "../storage/api.js";
 
-
 const HOUR_HEIGHT = 60;
 const GRID_HOURS = 24;
 const GRID_HEIGHT = HOUR_HEIGHT * GRID_HOURS;
@@ -28,9 +27,8 @@ const MIN_BLOCK_HEIGHT = 24;
 const MIN_BLOCK_MINUTES = 30;
 const DRAG_THRESHOLD = 5;
 const TIME_SCALE_WIDTH = 32;
-const BLOCK_SIDE_GAP = 3;
+const BLOCK_SIDE_GAP = 1;
 const LONG_PRESS_MS = 400;
-
 
 let timeIndicatorInterval = null;
 let activePlusEl = null;
@@ -44,7 +42,6 @@ function removeActivePlus() {
   }
   activePlusEl = null;
 }
-
 
 /**
  * Преобразует минуты от начала суток в пиксели.
@@ -102,7 +99,6 @@ function getTaskDueState(dueAt, dueEndAt) {
   return { state: "normal", label: "" };
 }
 
-
 /**
  * Создаёт фоновые линии часов и получасовых отметок.
  * @returns {HTMLElement[]} Массив DOM-элементов.
@@ -125,7 +121,6 @@ function buildHourLines() {
   }
   return lines;
 }
-
 
 /**
  * Группирует пересекающиеся по времени задачи в кластеры.
@@ -241,8 +236,8 @@ function buildTaskBlock(task) {
   const wp = 100 / task._totalColumns;
   const lp = task._column * wp;
   const due = getTaskDueState(task._dueAt, task._dueEndAt);
-
   const cls = ["week-task-block"];
+
   if (task.status === "done") cls.push("is-done");
   if (due.state === "overdue") cls.push("is-overdue");
   else if (due.state === "due-soon") cls.push("is-due-soon");
@@ -264,17 +259,9 @@ function buildTaskBlock(task) {
     block.appendChild(
       el("div", { class: "week-block-title", text: task.title }),
     );
-  if (h >= 40)
-    block.appendChild(
-      el("div", {
-        class: "week-block-time",
-        text: formatTimeRange(task._dueAt, task._dueEndAt),
-      }),
-    );
 
   return block;
 }
-
 
 /**
  * Отрисовывает и обновляет линию текущего времени.
@@ -356,7 +343,6 @@ function scrollToCurrentTime(grid, weekStart) {
   });
 }
 
-
 /** Показывает тултип с деталями задачи рядом с блоком. */
 function showTooltip(tooltip, block, task, grid) {
   tooltip.innerHTML = "";
@@ -394,7 +380,6 @@ function showTooltip(tooltip, block, task, grid) {
 function hideTooltip(t) {
   t.style.display = "none";
 }
-
 
 /** Находит колонку дня по координате X. */
 function getColumnAtX(x, dc) {
@@ -458,7 +443,6 @@ async function finishDrag(e, onUpdate, grid) {
   }
 
   if (dragBadge) dragBadge.remove();
-
   const gridBody = grid ? grid.querySelector(".week-grid-body") : null;
   const scrollTop = gridBody ? gridBody.scrollTop : 0;
 
@@ -568,7 +552,6 @@ function attachDragAndClick(allBlocks, weekStart, onUpdate, grid) {
     let isDrag = false;
     let tsx = 0;
     let tsy = 0;
-
     block.addEventListener(
       "touchstart",
       (e) => {
@@ -634,6 +617,7 @@ function attachDragAndClick(allBlocks, weekStart, onUpdate, grid) {
       "touchend",
       async (e) => {
         clearTimeout(lpt);
+        e.preventDefault();
         if (!isDrag) {
           openTaskPanel((findTaskById(task.id) || task).id, "view");
           return;
@@ -653,7 +637,7 @@ function attachDragAndClick(allBlocks, weekStart, onUpdate, grid) {
           dragState = null;
         }
       },
-      { passive: true },
+      { passive: false },
     );
   });
 }
@@ -671,26 +655,24 @@ function attachEmptyCellClick(grid, weekStart) {
       removeActivePlus();
 
       const rect = column.getBoundingClientRect();
-      const bodyEl = grid.querySelector(".week-grid-body");
-      const offsetY = e.clientY - rect.top + (bodyEl ? bodyEl.scrollTop : 0);
-      const sm = Math.round(pxToMinutes(offsetY) / SNAP_MINUTES) * SNAP_MINUTES;
+      const offsetY = e.clientY - rect.top;
+      const hourIndex = Math.max(
+        0,
+        Math.min(GRID_HOURS - 1, Math.floor(offsetY / HOUR_HEIGHT)),
+      );
 
       const dd = addDays(weekStart, Number(column.dataset.dayIndex));
       const da = new Date(dd);
-      da.setHours(0, 0, 0, 0);
-      const fd = addMinutes(
-        da,
-        Math.max(0, Math.min(sm, GRID_HOURS * 60 - SNAP_MINUTES)),
-      );
-
-      const tp = minutesToPx(getMinutesSinceMidnight(fd));
-      const ds = toDatetimeLocalValue(fd);
+      da.setHours(hourIndex, 0, 0, 0);
+      const ds = toDatetimeLocalValue(da);
+      // Кнопка появляется ровно в центре часовой ячейки.
+      const tp = hourIndex * HOUR_HEIGHT + HOUR_HEIGHT / 2;
 
       const btn = el("button", {
         class: "week-plus-btn",
         type: "button",
         "aria-label": "Создать задачу",
-        style: { top: `${tp - 10}px`, left: "calc(50% - 10px)" },
+        style: { top: `${tp}px`, left: "50%" },
       });
       btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>`;
 
@@ -720,7 +702,6 @@ function attachEmptyCellClick(grid, weekStart) {
     });
   }
 }
-
 
 /**
  * Отрисовывает полную сетку недели.

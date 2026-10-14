@@ -1,5 +1,4 @@
 /* ── Календарь: общие и годовые ── */
-
 .calendar {
   display: flex;
   flex-direction: column;
@@ -218,7 +217,6 @@
 }
 
 /* ── Календарь: месячный и недельный ── */
-
 .calendar-weekdays {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -382,7 +380,6 @@
 }
 
 /* ── Недельная сетка ── */
-
 .week-grid {
   position: relative;
   display: flex;
@@ -471,9 +468,7 @@
 }
 
 .week-time-scale {
-  position: sticky;
-  top: 0;
-  left: 0;
+  position: relative;
   z-index: 5;
   flex-shrink: 0;
   width: 32px;
@@ -510,10 +505,6 @@
   border-left: none;
 }
 
-.week-day-column.is-weekend {
-  background: var(--bg);
-}
-
 .week-hour-line {
   position: absolute;
   top: 0;
@@ -537,7 +528,7 @@
   position: absolute;
   z-index: 1;
   padding: 6px 8px;
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-xs);
   cursor: pointer;
   background: var(--surface);
   border: 1px solid var(--border-strong);
@@ -591,16 +582,8 @@
 .week-block-title {
   font-weight: var(--font-weight-semibold);
   line-height: var(--line-height-tight);
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-.week-block-time {
-  margin-top: 2px;
-  font-family: var(--font-mono);
-  font-size: var(--font-size-xs);
-  color: var(--text-secondary);
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .week-time-indicator {
@@ -611,7 +594,7 @@
 
 .week-time-dot {
   position: absolute;
-  top: -4px;
+  top: -3px;
   left: -4px;
   width: 8px;
   height: 8px;
@@ -689,6 +672,7 @@
   border: none;
   border-radius: 50%;
   box-shadow: var(--shadow-md);
+  transform: translate(-50%, -50%);
   transition:
     transform var(--dur-fast) var(--ease),
     background var(--dur-fast) var(--ease);
@@ -701,11 +685,11 @@
 
 .week-plus-btn:hover {
   background: var(--accent-hover);
-  transform: scale(1.2);
+  transform: translate(-50%, -50%) scale(1.2);
 }
 
 .week-plus-btn:active {
-  transform: scale(0.95);
+  transform: translate(-50%, -50%) scale(0.95);
 }
 
 .month-plus-btn {
