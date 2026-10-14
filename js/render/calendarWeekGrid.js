@@ -796,8 +796,11 @@ export function renderWeekGrid(
       if (!t.due_at || t.deleted_at) return false;
       const dueAt = parseLocalDate(t.due_at);
       const dueEndAt = t.due_end_at ? parseLocalDate(t.due_end_at) : null;
-      const taskEnd =
-        dueEndAt || new Date(dueAt.getTime() + MIN_BLOCK_MINUTES * 60 * 1000);
+
+      if (!dueEndAt) {
+        return dueAt >= dayStart && dueAt <= dayEnd;
+      }
+      
       return !(dueAt > dayEnd || taskEnd < dayStart);
     });
 
