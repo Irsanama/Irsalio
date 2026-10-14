@@ -797,7 +797,7 @@ export function renderWeekGrid(
       const dueAt = parseLocalDate(t.due_at);
       const dueEndAt = t.due_end_at ? parseLocalDate(t.due_end_at) : null;
       if (!dueEndAt) {
-        return dueAt >= dayStart && duaAt <= dayEnd;
+        return dueAt >= dayStart && dueAt <= dayEnd;
       }
       return !(dueAt > dayEnd || dueEndAt < dayStart);
     });
